@@ -1,0 +1,7 @@
+# Copyright 2011 Niels Ole Salscheider <niels_ole@salscheider-online.de>
+# Distributed under the terms of the GNU General Public License v2
+
+require kdbg
+
+PLATFORMS="~amd64 ~x86"
+

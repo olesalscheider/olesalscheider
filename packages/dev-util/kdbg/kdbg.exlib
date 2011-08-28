@@ -1,0 +1,20 @@
+# Copyright 2011 Niels Ole Salscheider <niels_ole@salscheider-online.de>
+# Distributed under the terms of the GNU General Public License v2
+
+require kde
+
+SUMMARY="Konversation is a graphical Internet Relay Chat client for KDE"
+HOMEPAGE="http://www.kdbg.org/"
+DOWNLOADS="mirror://sourceforge/${PN}/Source Code/${PV}/${PNV}.tar.gz"
+
+LICENCES="GPL-2"
+SLOT="0"
+MYOPTIONS=""
+
+DEPENDENCIES="
+	build+run:
+		kde/kdelibs
+		sys-process/procps
+	run:
+		sys-devel/gdb
+"
