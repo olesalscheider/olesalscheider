@@ -5,7 +5,7 @@ require kde
 
 SUMMARY="Konversation is a graphical Internet Relay Chat client for KDE"
 HOMEPAGE="http://www.kdbg.org/"
-DOWNLOADS="mirror://sourceforge/${PN}/Source Code/${PV}/${PNV}.tar.gz"
+DOWNLOADS="mirror://sourceforge/${PN}/Source%20Code/${PV}/${PNV}.tar.gz"
 
 LICENCES="GPL-2"
 SLOT="0"
