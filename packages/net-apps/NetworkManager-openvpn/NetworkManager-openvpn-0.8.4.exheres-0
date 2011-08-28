@@ -9,7 +9,7 @@ SUMMARY="OpenVPN plugin for NetworkManager"
 LICENCES="GPL-2"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
-MYOPTIONS=""
+MYOPTIONS="keyring [[ description = [ Use gnome-keyring for password storage ] ]]"
 
 DEPENDENCIES="
     build:
@@ -22,4 +22,6 @@ DEPENDENCIES="
     run:
       net-misc/openvpn[>=2.2]
 "
+
+DEFAULT_SRC_CONFIGURE_OPTION_WITHS=( 'keyring gnome' )
 
