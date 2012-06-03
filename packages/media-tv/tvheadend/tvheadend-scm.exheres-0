@@ -1,0 +1,56 @@
+# Copyright 2012 Niels Ole Salscheider <niels_ole@salscheider-online.de>
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="git://github.com/andoma/tvheadend.git"
+
+require scm-git systemd-service
+
+DOWNLOADS=""
+
+SUMMARY="Tvheadend is a combined DVB receiver, Digital Video Recorder and Live TV streaming server"
+HOMEPAGE="https://www.lonelycoder.com/tvheadend/"
+LICENCES="GPL-3"
+
+PLATFORMS="~amd64 ~x86"
+SLOT="0"
+MYOPTIONS="
+    avahi [[ description = [ Enable support for avahi-client ] ]]
+"
+
+DEPENDENCIES="
+    build:
+        sys-kernel/linux-headers
+    build+run:
+        dev-libs/openssl
+        avahi? ( net-dns/avahi )
+    run:
+        user/tvheadend
+"
+
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --mandir=/usr/share/man/man1
+    --release
+)
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
+    avahi
+)
+
+src_compile() {
+    unset PLATFORM
+    default
+}
+
+src_install() {
+    unset PLATFORM
+    default
+
+    install_systemd_files
+
+    dodoc README
+
+    keepdir /etc/tvheadend
+    edo chown tvheadend:video "${IMAGE}"/etc/tvheadend
+    edo chmod 0700 "${IMAGE}"/etc/tvheadend
+}
+

@@ -1,0 +1,13 @@
+# Copyright 2012 Niels Ole Salscheider <niels_ole@salscheider-online.de>
+# Distributed under the terms of the GNU General Public License v2
+
+[Unit]
+Description=tvheadend
+Wants=network.target
+
+[Service]
+User=tvheadend
+ExecStart=/usr/bin/tvheadend -C -u tvheadend -g video -c /etc/tvheadend
+
+[Install]
+WantedBy=multi-user.target
