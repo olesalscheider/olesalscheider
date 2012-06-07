@@ -1,0 +1,15 @@
+# Copyright 2012 Niels Ole Salscheider <niels_ole@salscheider-online.de>
+# Distributed under the terms of the GNU General Public License v2
+
+require easy-multibuild
+
+DOWNLOADS="http://people.freedesktop.org/~cbrill/${PN}/${PNV}.tar.bz2"
+SUMMARY="Helper library for S3TC texture (de)compressio"
+HOMEPAGE="http://cgit.freedesktop.org/~mareko/libtxc_dxtn/"
+LICENCES="MIT"
+
+PLATFORMS="~amd64 ~x86"
+SLOT="0"
+
+MYOPTIONS="multibuild_c: 32 64"
+
