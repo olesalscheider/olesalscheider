@@ -1,0 +1,91 @@
+# Copyright 2012 Niels Ole Salscheider <niels_ole@salscheider-online.de>
+# Distributed under the terms of the GNU General Public License v2
+
+DOWNLOADS="http://downloads.syncevolution.org/syncevolution/sources/${PNV}.tar.gz"
+
+SUMMARY="SyncEvolution synchronizes personal information management (PIM) data via various protocols (SyncML, CalDAV/CardDAV, ActiveSync)."
+HOMEPAGE="https://syncevolution.org/"
+LICENCES="GPL-2"
+
+PLATFORMS="~amd64 ~x86"
+SLOT="0"
+
+MYOPTIONS="
+    akonadi [[ description = [ Enable akonadi as pim backend ] ]]
+    bluetooth [[ description = [ Enable support for SyncML over bluetooth ] ]]
+    doc [[ description = [ Install API documentation ] ]]
+    evolution [[ description = [ Enable evolution as pim backend ] ]]
+    gnome-keyring [[ description = [ Use gnome-keyring for password storage ] ]]
+    kwallet [[ description = [ Use kwallet for password storage ] ]]
+"
+
+#tests fail at the moment
+RESTRICT="test"
+
+DEPENDENCIES="
+    build+run:
+        dev-libs/boost
+        dev-libs/glib[>=2.16]
+        dev-libs/pcre
+        dev-libs/libxslt
+        gnome-desktop/libsoup
+        sys-apps/dbus
+        x11-libs/libnotify
+        bluetooth? (
+            net-wireless/openobex
+            net-wireless/bluez
+        )
+        akonadi? (
+            kde/kdepimlibs
+            kde/kdepim-runtime
+            kde/kwallet
+            server-pim/akonadi
+            x11-libs/qt
+        )
+        evolution? (
+            gnome-desktop/evolution-data-server
+            office-libs/libical
+        )
+        gnome-keyring? (
+            gnome-desktop/gnome-keyring
+        )
+        kwallet? (
+            kde/kwallet
+        )
+    run:
+        net-twisted/TwistedWeb
+"
+
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/fix-akonadi-build.patch )
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( akonadi bluetooth doc "evolution ecal" "evolution ebook" gnome-keyring kwallet )
+
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --enable-release-mode
+    --enable-libsoup
+    --enable-core
+    --enable-dbus-service
+    --enable-notify
+    #disable gui, not tested
+    --disable-gui
+    --disable-gnome-bluetooth-panel-plugin
+    #disable unused backends:
+    --disable-activesync
+    --disable-sqlite
+    --disable-addressbook
+    --disable-file
+    --disable-kcalextended
+    --disable-maemocal
+    --disable-qtcontacts
+    --disable-dav
+    --disable-xmlrpc
+)
+
+src_install() {
+    default
+
+    # emtpy directory
+    if ! doc ; then
+        edo rmdir "${IMAGE}"/usr/share/man/{man1,}
+    fi
+}
