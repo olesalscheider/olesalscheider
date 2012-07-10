@@ -28,8 +28,7 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
 src_install() {
     default
 
-    dodoc README AUTHORS TODO ChangeLog \
-    docs/Upgrading_from_1.1 \
+    dodoc docs/Upgrading_from_1.1 \
     docs/HOWTOs/rsnapshot-{Mac,windows}-howto
 
     docinto utils
