@@ -5,7 +5,7 @@
 
 DOWNLOADS="http://rsnapshot.org/downloads/${PNV}.tar.gz"
 
-SUMMARY="snapshot is a filesystem snapshot utility for making backups of local and remote systems."
+SUMMARY="rsnapshot is a filesystem snapshot utility for making backups of local and remote systems."
 HOMEPAGE="http://www.rsnapshot.org/"
 LICENCES="GPL-2"
 
