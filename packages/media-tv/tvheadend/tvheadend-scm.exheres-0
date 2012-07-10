@@ -9,7 +9,7 @@ SUMMARY="Tvheadend is a combined DVB receiver, Digital Video Recorder and Live T
 HOMEPAGE="https://www.lonelycoder.com/tvheadend/"
 LICENCES="GPL-3"
 
-PLATFORMS="~amd64 ~x86"
+PLATFORMS="~amd64"
 SLOT="0"
 MYOPTIONS="
     avahi [[ description = [ Enable support for avahi-client that allows auto-discovery of tvheadend, e. g. for the showtime client ] ]]
