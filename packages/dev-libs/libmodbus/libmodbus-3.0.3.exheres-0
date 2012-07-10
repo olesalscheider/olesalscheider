@@ -12,6 +12,6 @@ SLOT="0"
 src_install() {
     default
 
-    dodoc AUTHORS MIGRATION NEWS README.rst
+    dodoc MIGRATION README.rst
 }
 
