@@ -12,6 +12,6 @@ SLOT="0"
 src_install() {
     default
 
-    dodoc MIGRATION README.rst
+    dodoc MIGRATION
 }
 
