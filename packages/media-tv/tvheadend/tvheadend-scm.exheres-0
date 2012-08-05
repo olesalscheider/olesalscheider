@@ -1,7 +1,7 @@
 # Copyright 2012 Niels Ole Salscheider <niels_ole@salscheider-online.de>
 # Distributed under the terms of the GNU General Public License v2
 
-require github [ user=andoma ] systemd-service
+require github systemd-service
 
 DOWNLOADS=""
 
@@ -51,5 +51,11 @@ src_install() {
     keepdir /etc/tvheadend
     edo chown tvheadend:video "${IMAGE}"/etc/tvheadend
     edo chmod 0700 "${IMAGE}"/etc/tvheadend
+}
+
+src_test() {
+    unset PLATFORM
+
+    default
 }
 
