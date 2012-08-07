@@ -56,7 +56,6 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=( akonadi bluetooth "evolution ecal" "evolu
 
 DEFAULT_SRC_PREPARE_PATCHES=(
     "${FILES}"/${PNV}-docbook-xsl.patch
-    "${FILES}"/${PNV}-potfiles.patch
 )
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
