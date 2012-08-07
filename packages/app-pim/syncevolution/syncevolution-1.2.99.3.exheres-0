@@ -92,5 +92,8 @@ src_install() {
 
     # remove emtpy directory
     edo rmdir "${IMAGE}"/usr/share/man/{man1,}
+
+    #remove copy of patched README file
+    edo rm "${IMAGE}"/usr/share/doc/${PNV}/README.patched.rst
 }
 
