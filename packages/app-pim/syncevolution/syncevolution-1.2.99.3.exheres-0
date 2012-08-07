@@ -80,13 +80,6 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
     --disable-xmlrpc
 )
 
-src_compile() {
-    #allow access to 'unix:/tmp/.X11-unix/X0', necessary to patch README.rst
-    esandbox allow_net --connect 'unix-abstract:/tmp/.X11-unix/X0'
-    default
-    esandbox disallow_net --connect 'unix-abstract:/tmp/.X11-unix/X0'
-}
-
 src_install() {
     default
 
