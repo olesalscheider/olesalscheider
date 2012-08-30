@@ -1,0 +1,25 @@
+# Copyright 2012 Niels Ole Salscheider <niels_ole@salscheider-online.de>
+# Distributed under the terms of the GNU General Public License v2
+
+require kde.org [ git=true ]
+
+SUMMARY="This module implements a GUI for the Wacom Linux Drivers and extends it with profile support to handle different button / pen layouts per profile"
+HOMEPAGE="https://projects.kde.org/projects/extragear/base/wacomtablet/"
+
+LICENCES="GPL-2"
+PLATFORMS="~amd64"
+SLOT="4"
+MYOPTIONS=""
+
+SCM_BRANCH="master"
+
+DEPENDENCIES="
+    build+run:
+        kde/kdelibs:${SLOT}
+        x11-libs/libX11
+        x11-libs/libXrandr
+        x11-libs/libXi
+    run:
+        x11-drivers/xf86-input-wacom[>=0.10.11]
+"
+
