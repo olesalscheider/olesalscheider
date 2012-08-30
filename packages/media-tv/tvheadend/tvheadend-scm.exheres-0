@@ -18,32 +18,32 @@ MYOPTIONS="
 DEPENDENCIES="
     build:
         sys-kernel/linux-headers
+        dev-lang/python:*
     build+run:
         dev-libs/openssl
         avahi? ( net-dns/avahi )
         user/tvheadend
+    run:
+        media-tv/dvb-apps
 "
 
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     --mandir=/usr/share/man/man1
+    --enable-cwc
+    --enable-v4l
+    --enable-linuxdvb
+    --disable-bundle
+    # only needed for bundle
+    --disable-zlib
+    # just copies files from dvb-apps, we do not want that
+    --disable-dvbscan
 )
 
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     avahi
 )
 
-src_compile() {
-    #PLATFORM is used in the build system. Unset it since building fails otherwise.
-    #see https://www.lonelycoder.com/redmine/issues/1056
-    unset PLATFORM
-    default
-}
-
 src_install() {
-    #PLATFORM is used in the build system. Unset it since building fails otherwise.
-    #see https://www.lonelycoder.com/redmine/issues/1056
-    unset PLATFORM
-
     default
 
     install_systemd_files
@@ -51,11 +51,5 @@ src_install() {
     keepdir /etc/tvheadend
     edo chown tvheadend:video "${IMAGE}"/etc/tvheadend
     edo chmod 0700 "${IMAGE}"/etc/tvheadend
-}
-
-src_test() {
-    unset PLATFORM
-
-    default
 }
 
