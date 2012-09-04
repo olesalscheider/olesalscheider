@@ -1,0 +1,31 @@
+# Copyright 2012 Niels Ole Salscheider <niels_ole@salscheider-online.de>
+# Distributed under the terms of the GNU General Public License v2
+
+DOWNLOADS="http://telepathy.freedesktop.org/releases/${PN}/${PNV}.tar.gz"
+
+SUMMARY="SIP plugin for telepathy"
+HOMEPAGE="http://telepathy.freedesktop.org/wiki/"
+LICENCES="LGPL-2.1"
+
+PLATFORMS="~amd64"
+SLOT="0"
+
+MYOPTIONS="debug"
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
+    debug
+)
+
+DEPENDENCIES="
+    build+run:
+        dev-libs/glib:2[>=2.30]
+        sys-apps/dbus[>=0.60]
+        net-libs/sofia-sip[>=1.12.11]
+        net-im/telepathy-glib[>=0.17.7]
+    build:
+        dev-libs/libxslt
+        dev-lang/python:*
+    test:
+        net-twisted/TwistedCore
+"
+
