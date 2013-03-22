@@ -7,7 +7,7 @@ Wants=network.target
 
 [Service]
 User=tvheadend
-ExecStart=/usr/bin/tvheadend -C -u tvheadend -g video -c /etc/tvheadend
+ExecStart=/usr/bin/tvheadend -C -6 -u tvheadend -g video -c /etc/tvheadend
 
 [Install]
 WantedBy=multi-user.target
