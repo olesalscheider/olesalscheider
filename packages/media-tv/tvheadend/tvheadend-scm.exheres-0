@@ -6,7 +6,7 @@ require github systemd-service
 DOWNLOADS=""
 
 SUMMARY="Tvheadend is a combined DVB receiver, Digital Video Recorder and Live TV streaming server"
-HOMEPAGE="https://www.lonelycoder.com/tvheadend/"
+HOMEPAGE="https://www.tvheadend.org/"
 LICENCES="GPL-3"
 
 PLATFORMS="~amd64"
