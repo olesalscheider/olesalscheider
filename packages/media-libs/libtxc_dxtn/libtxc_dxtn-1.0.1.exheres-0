@@ -13,3 +13,8 @@ SLOT="0"
 
 MYOPTIONS="multibuild_c: 32 64"
 
+DEPENDENCIES="
+    build+run:
+        x11-dri/mesa[multibuild_c:*(-)?]
+"
+
