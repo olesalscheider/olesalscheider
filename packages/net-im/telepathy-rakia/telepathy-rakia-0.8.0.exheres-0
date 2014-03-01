@@ -16,6 +16,9 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     debug
 )
 
+#Causes timeouts. See also comment in tests/twisted/test-message.py
+RESTRICT="test"
+
 DEPENDENCIES="
     build+run:
         dev-libs/glib:2[>=2.30]
