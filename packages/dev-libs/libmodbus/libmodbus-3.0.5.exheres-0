@@ -1,7 +1,7 @@
 # Copyright 2012 Niels Ole Salscheider <niels_ole@salscheider-online.de>
 # Distributed under the terms of the GNU General Public License v2
 
-DOWNLOADS="http://cloud.github.com/downloads/stephane/${PN}/${PNV}.tar.gz"
+DOWNLOADS="http://libmodbus.org/site_media/build/${PNV}.tar.gz"
 SUMMARY="A Modbus library for Linux, Mac OS X, FreeBSD, QNX and Win32"
 HOMEPAGE="http://libmodbus.org/"
 LICENCES="GPL-3 LGPL-2.1"
