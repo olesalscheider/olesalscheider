@@ -11,6 +11,9 @@ HOMEPAGE="http://git.linuxtv.org/dtv-scan-tables.git"
 LICENCES="GPL-2 LGPL-2.1"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
+MYOPTIONS=""
+
+DEPENDENCIES=""
 
 src_install() {
     edo mkdir "${IMAGE}"/usr{,/share{,/dvb}}
