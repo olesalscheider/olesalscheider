@@ -1,0 +1,23 @@
+# Copyright 2014 Niels Ole Salscheider
+# Distributed under the terms of the GNU General Public License v2
+
+SCM_REPOSITORY="git://linuxtv.org/${PN}.git"
+
+require scm-git
+
+SUMMARY="Digital TV scan tables"
+HOMEPAGE="http://git.linuxtv.org/dtv-scan-tables.git"
+
+LICENCES="GPL-2 LGPL-2.1"
+SLOT="0"
+PLATFORMS="~amd64 ~x86"
+
+src_install() {
+    edo mkdir "${IMAGE}"/usr{,/share{,/dvb}}
+    edo cp -R "${WORK}"/atsc "${IMAGE}"/usr/share/dvb
+    edo cp -R "${WORK}"/channels-conf "${IMAGE}"/usr/share/dvb
+    edo cp -R "${WORK}"/dvb-c "${IMAGE}"/usr/share/dvb
+    edo cp -R "${WORK}"/dvb-s "${IMAGE}"/usr/share/dvb
+    edo cp -R "${WORK}"/dvb-t "${IMAGE}"/usr/share/dvb
+}
+
