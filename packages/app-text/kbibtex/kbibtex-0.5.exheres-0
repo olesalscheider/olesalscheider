@@ -3,7 +3,7 @@
 
 require cmake [ api=2 ]
 
-DOWNLOADS="http://download.gna.org/${PN}/$(ever range 1-2)/${PNV}.tar.bz2"
+DOWNLOADS="http://download.gna.org/${PN}/$(ever range 1-2)/${PNV}.tar.xz"
 
 SUMMARY="KBibTeX is a BibTeX editor for KDE to edit bibliographies used with LaTeX."
 HOMEPAGE="http://home.gna.org/kbibtex/"
