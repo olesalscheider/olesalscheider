@@ -1,0 +1,30 @@
+From 641e1afe7a9f6aafbb6da6134fe330b6fd22d9da Mon Sep 17 00:00:00 2001
+From: Niels Ole Salscheider <niels_ole@salscheider-online.de>
+Date: Sun, 2 Mar 2014 13:05:48 +0100
+Subject: [PATCH] Do not import docbook
+
+Source: Niels Ole Salscheider
+Upstream: different approach. They import docbook xsl in commit 3ac2b73ffb3ead90279cce9a6b588dd161915a99
+Reason: make does not know how to get build/xsl/html/docbook.xsl
+---
+ src/dbus/interfaces/interfaces.am | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/dbus/interfaces/interfaces.am b/src/dbus/interfaces/interfaces.am
+index a98c5ee..7a9cb8b 100644
+--- a/src/dbus/interfaces/interfaces.am
++++ b/src/dbus/interfaces/interfaces.am
+@@ -14,8 +14,8 @@ src/dbus/interfaces/syncevo-dbus-api-doc.xml: src/dbus/interfaces/syncevo-server
+ 	done; \
+ 	echo '</reference>' >>$@
+ 
+-src/dbus/interfaces/syncevo-dbus-api-doc.html: src/dbus/interfaces/syncevo-dbus-api-doc.xml build/xsl/html/docbook.xsl src/dbus/interfaces/.stamp
+-	$(AM_V_GEN)$(XSLT) -o $@ $(top_srcdir)/build/xsl/html/docbook.xsl $<
++src/dbus/interfaces/syncevo-dbus-api-doc.html: src/dbus/interfaces/syncevo-dbus-api-doc.xml src/dbus/interfaces/.stamp
++	$(AM_V_GEN)$(XSLT) -o $@ http://docbook.sourceforge.net/release/xsl/current/html/docbook.xsl $<
+ 
+ # This serializes the creation of src/dbus/interfaces when using
+ # out-of-tree builds. xsltproc does this as part of its -o
+-- 
+1.9.0
+
