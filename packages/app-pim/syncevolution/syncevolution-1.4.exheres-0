@@ -13,9 +13,11 @@ PLATFORMS="~amd64 ~x86"
 SLOT="0"
 
 MYOPTIONS="
-    akonadi [[ description = [ Enable akonadi as pim backend ] ]]
+    (
+        akonadi [[ description = [ Enable akonadi as pim backend ] ]]
+        evolution [[ description = [ Enable evolution as pim backend ] ]]
+    ) [[ number-selected = at-least-one ]]
     bluetooth [[ description = [ Enable support for SyncML over bluetooth ] ]]
-    evolution [[ description = [ Enable evolution as pim backend ] ]]
     gnome-keyring [[ description = [ Use gnome-keyring for password storage ] ]]
     kwallet [[ description = [ Use kwallet for password storage ] ]]
 "
