@@ -1,0 +1,53 @@
+# Copyright 2014 Niels Ole Salscheider
+# Distributed under the terms of the GNU General Public License v2
+
+require cmake [ api=2 ]
+
+SUMMARY="Ceres Solver is an open source C++ library for modeling and solving large complicated nonlinear least squares problems."
+
+HOMEPAGE="http://ceres-solver.org/"
+DOWNLOADS="http://ceres-solver.org/${PNV}.tar.gz"
+
+LICENCES="BSD-3"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    openmp [[ description = [ Support for Open Multi-Processing ] ]]
+"
+
+DEPENDENCIES="
+    build+run:
+        sci-libs/eigen:3
+        sci-libs/lapack
+        virtual/blas
+        openmp? ( sys-devel/gcc:*[openmp?] )
+"
+
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/0001-Don-t-build-miniglog-unconditionally-as-a-static-lib.patch
+)
+
+CMAKE_SRC_CONFIGURE_OPTIONS=(
+    'openmp OPENMP'
+)
+
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DMINIGLOG:BOOL=ON
+    -DLAPACK:BOOL=ON
+    -DSCHUR_SPECIALIZATIONS:BOOL=ON
+    -DCUSTOM_BLAS:BOOL=ON
+    -DBUILD_SHARED_LIBS:BOOL=ON
+
+    # fails to build
+    -DBUILD_DOCUMENTATION:BOOL=OFF
+
+    # unpackaged dependencies.
+    -DBUILD_TESTING:BOOL=OFF
+    -DBUILD_EXAMPLES:BOOL=OFF
+    -DGFLAGS:BOOL=OFF
+    # SuiteSparse is strongly recommended for bundle adjustment
+    -DSUITESPARSE:BOOL=OFF
+    -DCXSPARSE:BOOL=OFF
+)
+
+
