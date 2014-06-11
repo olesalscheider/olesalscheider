@@ -6,7 +6,7 @@ require sourceforge [ suffix=tgz ]
 
 SUMMARY="Command-line program for sniping eBay auctions"
 
-LICENCES="BSD"
+LICENCES="BSD-2"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
 
