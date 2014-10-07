@@ -13,7 +13,10 @@ SLOT="0"
 PLATFORMS="~amd64 ~x86"
 MYOPTIONS=""
 
-DEPENDENCIES=""
+DEPENDENCIES="
+    build:
+        media-libs/v4l-utils
+"
 
 src_install() {
     edo mkdir "${IMAGE}"/usr{,/share{,/dvb}}
