@@ -8,11 +8,16 @@ SUMMARY="Ceres Solver is an open source C++ library for modeling and solving lar
 HOMEPAGE="http://ceres-solver.org/"
 DOWNLOADS="http://ceres-solver.org/${PNV}.tar.gz"
 
-LICENCES="BSD-3"
 SLOT="0"
 PLATFORMS="~amd64"
 MYOPTIONS="
+    eigen-sparse [[ description = [ Use Eigen for Cholesky factorization. This forces the LGPL licence ] ]]
     openmp [[ description = [ Support for Open Multi-Processing ] ]]
+"
+
+LICENCES="
+    !eigen-sparse? ( BSD-3 )
+    eigen-sparse? ( LGPL-2.1 )
 "
 
 DEPENDENCIES="
@@ -23,11 +28,8 @@ DEPENDENCIES="
         openmp? ( sys-devel/gcc:*[openmp?] )
 "
 
-DEFAULT_SRC_PREPARE_PATCHES=(
-    "${FILES}"/0001-Don-t-build-miniglog-unconditionally-as-a-static-lib.patch
-)
-
 CMAKE_SRC_CONFIGURE_OPTIONS=(
+    'eigen-sparse EIGENSPARSE'
     'openmp OPENMP'
 )
 
