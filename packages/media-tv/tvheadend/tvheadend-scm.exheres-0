@@ -22,9 +22,9 @@ DEPENDENCIES="
         sys-kernel/linux-headers
         dev-lang/python:*
     build+run:
-        dev-libs/openssl
         dev-libs/uriparser[>=0.8.0]
         net-misc/curl
+        virtual/libssl
         avahi? ( net-dns/avahi )
         ffmpeg? (
             !libav? ( media/ffmpeg )
