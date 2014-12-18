@@ -12,8 +12,8 @@ PLATFORMS="~amd64 ~x86"
 
 DEPENDENCIES="
     build+run:
-        dev-libs/openssl
         net-misc/curl[>=7.12]
+        virtual/libssl
 "
 
 WORK="${WORKBASE}/${MY_PNV}"
