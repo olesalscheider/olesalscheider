@@ -17,7 +17,7 @@ DEPENDENCIES="
     build:
         app-doc/doxygen
     build+run:
-        dev-libs/openssl
+        virtual/libssl
     test:
         dev-libs/check
 "
