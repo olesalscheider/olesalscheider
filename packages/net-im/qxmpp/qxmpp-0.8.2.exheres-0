@@ -1,0 +1,33 @@
+# Copyright 2015 Niels Ole Salscheider <niels_ole@salscheider-online.de>
+# Distributed under the terms of the GNU General Public License v2
+
+require qmake [ slot=5 ]
+
+SUMMARY="QXmpp is a cross-platform C++ XMPP client and server library."
+HOMEPAGE="https://github.com/qxmpp-project/qxmpp"
+DOWNLOADS="https://github.com/qxmpp-project/qxmpp/archive/v${PV}.tar.gz"
+
+LICENCES="LGPL-2.1"
+SLOT="0"
+PLATFORMS="~amd64"
+
+DEPENDENCIES="
+    build:
+        app-doc/doxygen
+    build+run:
+        x11-libs/qtbase:5
+"
+
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/0001-do-not-install-testcases-fixes-37.patch
+)
+
+EQMAKE_PARAMS=(
+    PREFIX=/usr
+    LIBDIR=${LIBDIR}
+
+    QXMPP_USE_DOXYGEN=1
+    QXMPP_PROFILE=0
+)
+
+

@@ -1,0 +1,25 @@
+Upstream: Yes
+
+From ce219130bfc35421521f3f6e20f36b2a8f5409ab Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Jeremy=20Lain=C3=A9?= <jeremy.laine@m4x.org>
+Date: Thu, 5 Feb 2015 20:03:38 +0100
+Subject: [PATCH] do not install testcases (fixes #37)
+
+---
+ tests/tests.pri | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/tests/tests.pri b/tests/tests.pri
+index 4e439c4..364d28b 100644
+--- a/tests/tests.pri
++++ b/tests/tests.pri
+@@ -9,3 +9,6 @@ QMAKE_LIBDIR += ../../src
+ QMAKE_RPATHDIR += $$OUT_PWD/../../src
+ INCLUDEPATH += $$PWD $$QXMPP_INCLUDEPATH
+ LIBS += $$QXMPP_LIBS
++
++# do not install testcases
++target.CONFIG += no_default_install
+-- 
+2.2.2
+
