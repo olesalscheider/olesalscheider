@@ -18,10 +18,6 @@ DEPENDENCIES="
         x11-libs/qtbase:5
 "
 
-DEFAULT_SRC_PREPARE_PATCHES=(
-    "${FILES}"/0001-do-not-install-testcases-fixes-37.patch
-)
-
 EQMAKE_PARAMS=(
     PREFIX=/usr
     LIBDIR=${LIBDIR}
