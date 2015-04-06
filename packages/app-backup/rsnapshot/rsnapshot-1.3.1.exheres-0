@@ -21,6 +21,8 @@ DEPENDENCIES="
         net-misc/rsync
 "
 
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/perl-5.18-fix.patch )
+
 DEFAULT_SRC_CONFIGURE_PARAMS=(
     --hates=docdir
 )

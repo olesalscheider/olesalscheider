@@ -1,0 +1,15 @@
+Written by: Thomas Klausner
+Upstream: https://github.com/rsnapshot/rsnapshot/issues/8
+Reason: Fixes build with perl 5.18
+
+--- a/rsnapshot-program.pl 2008-08-31 11:17:07.000000000 +0000
++++ b/rsnapshot-program.pl
+@@ -6716,6 +6716,8 @@ Putting it all together (an example file
+ 
+ =back
+ 
++=back
++
+ =head1 USAGE
+ 
+ B can be used by any user, but for system-wide backups
