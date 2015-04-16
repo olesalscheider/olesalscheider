@@ -1,0 +1,47 @@
+Upstream: https://bugs.freedesktop.org/show_bug.cgi?id=90055
+Reason: Allows to compile with multiarch
+
+From 29da31e9f86eee7ef70e50af92ef4798eb5934c6 Mon Sep 17 00:00:00 2001
+From: Niels Ole Salscheider <niels_ole@salscheider-online.de>
+Date: Thu, 16 Apr 2015 20:39:13 +0200
+Subject: [PATCH] Use ${PKG_CONFIG} instead of pkg-config.
+
+This fixes the build on Exherbo that only has prefixed versions of pkg-config.
+---
+ src/backends/akonadi/configure-sub.in | 2 +-
+ src/backends/kde/configure-sub.in     | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/backends/akonadi/configure-sub.in b/src/backends/akonadi/configure-sub.in
+index ed05f1b..1e72e5f 100644
+--- a/src/backends/akonadi/configure-sub.in
++++ b/src/backends/akonadi/configure-sub.in
+@@ -14,7 +14,7 @@ if ! test "$KDEPIM_CFLAGS"; then
+    fi
+ fi
+ if ! test "$KDEPIM_LIBS"; then
+-   KDEPIM_LIBS="-L`kde4-config --install lib` -lakonadi-kde `pkg-config --libs QtDBus` -lQtCore -lkdeui -lkdecore"
++   KDEPIM_LIBS="-L`kde4-config --install lib` -lakonadi-kde `${PKG_CONFIG} --libs QtDBus` -lQtCore -lkdeui -lkdecore"
+ fi
+ AC_LANG_PUSH(C++)
+ old_CPPFLAGS="$CPPFLAGS"
+diff --git a/src/backends/kde/configure-sub.in b/src/backends/kde/configure-sub.in
+index a489764..970a3d4 100644
+--- a/src/backends/kde/configure-sub.in
++++ b/src/backends/kde/configure-sub.in
+@@ -9,10 +9,10 @@ then
+   then
+     KDEKWALLETFOUND=yes
+     if ! test "$KDE_KWALLET_CFLAGS"; then
+-      KDE_KWALLET_CFLAGS="-I`$KDE4_CONFIG --path include` -I`$KDE4_CONFIG --path include`/KDE `pkg-config --cflags QtDBus QtCore`"
++      KDE_KWALLET_CFLAGS="-I`$KDE4_CONFIG --path include` -I`$KDE4_CONFIG --path include`/KDE `${PKG_CONFIG} --cflags QtDBus QtCore`"
+     fi
+     if ! test "$KDE_KWALLET_LIBS"; then
+-      KDE_KWALLET_LIBS="-lkdeui -lkdecore -L`kde4-config --install lib` `pkg-config --libs QtDBus QtCore`"
++      KDE_KWALLET_LIBS="-lkdeui -lkdecore -L`kde4-config --install lib` `${PKG_CONFIG} --libs QtDBus QtCore`"
+     fi
+     AC_LANG_PUSH(C++)
+     old_CPPFLAGS="$CPPFLAGS"
+-- 
+2.3.3
+
