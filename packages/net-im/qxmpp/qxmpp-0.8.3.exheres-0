@@ -18,9 +18,14 @@ DEPENDENCIES="
         x11-libs/qtbase:5
 "
 
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}"/0001-Allow-to-set-the-install-paths-separately.patch )
+
 EQMAKE_PARAMS=(
     PREFIX=/usr
     LIBDIR=lib
+    HEADER_INSTALL_PATH=/usr/$(exhost --target)/include/qxmpp
+    LIB_INSTALL_PATH=/usr/$(exhost --target)/lib
+    DOC_INSTALL_PATH=/usr/share/doc/qxmpp
 
     QXMPP_USE_DOXYGEN=1
     QXMPP_PROFILE=0

@@ -1,0 +1,75 @@
+Upsteam: https://github.com/qxmpp-project/qxmpp/pull/49
+Reason: Install path fixes for cross
+
+From b81608ea2f0ee6babbd7fcb80dc1988893a602cd Mon Sep 17 00:00:00 2001
+From: Niels Ole Salscheider <niels_ole@salscheider-online.de>
+Date: Fri, 17 Apr 2015 09:04:51 +0200
+Subject: [PATCH] Allow to set the install paths separately
+
+This patch allows to override the following variables:
+HEADER_INSTALL_PATH: Install path for the header files
+LIB_INSTALL_PATH: Install path for the libraries
+DOC_INSTALL_PATH: Install path for the documentation
+
+If these variables are not set they are assigned the old values.
+
+This is necessary for e. g. Exherbo, where docs go to /usr/share but
+libraries and headers go to /usr/arch-triplet/{lib,include}.
+---
+ qxmpp.pri   | 10 ++++++++++
+ qxmpp.pro   |  2 +-
+ src/src.pro |  4 ++--
+ 3 files changed, 13 insertions(+), 3 deletions(-)
+
+diff --git a/qxmpp.pri b/qxmpp.pri
+index 35c19bf..e2d5f4e 100644
+--- a/qxmpp.pri
++++ b/qxmpp.pri
+@@ -84,6 +84,16 @@ isEmpty(LIBDIR) {
+     LIBDIR = lib
+ }
+ 
++isEmpty(HEADER_INSTALL_PATH) {
++    HEADER_INSTALL_PATH = $$PREFIX/include/qxmpp
++}
++isEmpty(LIB_INSTALL_PATH) {
++    LIB_INSTALL_PATH = $$PREFIX/$$LIBDIR
++}
++isEmpty(DOC_INSTALL_PATH) {
++    DOC_INSTALL_PATH = $$PREFIX/share/doc/qxmpp
++}
++
+ # Internal API auto-tests
+ !isEmpty(QXMPP_AUTOTEST_INTERNAL) {
+     DEFINES += QXMPP_AUTOTEST_INTERNAL
+diff --git a/qxmpp.pro b/qxmpp.pro
+index a309a48..189673c 100644
+--- a/qxmpp.pro
++++ b/qxmpp.pro
+@@ -13,7 +13,7 @@ android | ios {
+     docs.commands = cd doc/ && $(MAKE) docs
+     docs.depends = sub-doc
+     docs.files = doc/html
+-    docs.path = $$PREFIX/share/doc/qxmpp
++    docs.path = $$DOC_INSTALL_PATH
+     docs.CONFIG += no_check_exist directory
+ 
+     INSTALLS += docs
+diff --git a/src/src.pro b/src/src.pro
+index 44d8495..dcedad0 100644
+--- a/src/src.pro
++++ b/src/src.pro
+@@ -25,8 +25,8 @@ HEADERS += $$INSTALL_HEADERS
+ 
+ # Installation
+ headers.files = $$INSTALL_HEADERS
+-headers.path = $$PREFIX/include/qxmpp
+-target.path = $$PREFIX/$$LIBDIR
++headers.path = $$HEADER_INSTALL_PATH
++target.path = $$LIB_INSTALL_PATH
+ INSTALLS += headers target
+ 
+ # pkg-config support
+-- 
+2.1.4
+
