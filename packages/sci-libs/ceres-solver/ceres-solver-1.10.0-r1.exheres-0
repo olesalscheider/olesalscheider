@@ -23,7 +23,8 @@ LICENCES="
 DEPENDENCIES="
     build+run:
         sci-libs/eigen:3
-        sci-libs/lapack
+        sci-libs/SuiteSparse
+        virtual/lapack
         virtual/blas
         openmp? ( sys-libs/libgomp:= )
 "
@@ -40,6 +41,8 @@ CMAKE_SRC_CONFIGURE_PARAMS=(
     -DSCHUR_SPECIALIZATIONS:BOOL=ON
     -DCUSTOM_BLAS:BOOL=ON
     -DBUILD_SHARED_LIBS:BOOL=ON
+    # SuiteSparse is strongly recommended for bundle adjustment
+    -DSUITESPARSE:BOOL=ON
 
     # fails to build
     -DBUILD_DOCUMENTATION:BOOL=OFF
@@ -48,8 +51,8 @@ CMAKE_SRC_CONFIGURE_PARAMS=(
     -DBUILD_TESTING:BOOL=OFF
     -DBUILD_EXAMPLES:BOOL=OFF
     -DGFLAGS:BOOL=OFF
-    # SuiteSparse is strongly recommended for bundle adjustment
-    -DSUITESPARSE:BOOL=OFF
+
+    # Slower alternative to SuiteSparse
     -DCXSPARSE:BOOL=OFF
 )
 
