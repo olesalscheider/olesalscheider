@@ -1,0 +1,43 @@
+# Copyright 2015 Niels Ole Salscheider <niels_ole@salscheider-online.de>
+# Distributed under the terms of the GNU General Public License v2
+
+require sourceforge [ suffix=tar.gz project=viennacl ] cmake [ api=2 ]
+
+SUMMARY="Linear algebra and solver library using CUDA, OpenCL, and OpenMP"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+MYOPTIONS="
+    opencl [[ description = [ Build with OpenCL support. ] ]]
+    openmp [[ description = [ Build with OpenMP support. ] ]]
+"
+
+DEPENDENCIES="
+    build+run:
+        opencl? ( x11-dri/mesa[opencl] )
+        openmp? ( sys-libs/libgomp:= )
+"
+
+CMAKE_SRC_CONFIGURE_OPTION_ENABLES=(
+    'opencl OPENCL'
+    'openmp OPENMP'
+)
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DBUILD_EXAMPLES:BOOL=OFF
+    # disable tests as long as OpenCL is not reliable enough
+    -DBUILD_TESTING:BOOL=OFF
+    -DENABLE_CUDA:BOOL=OFF
+    -DENABLE_UBLAS:BOOL=OFF
+)
+
+src_install() {
+    cmake_src_install
+
+    # remove empty directories
+    edo rm -rf "${IMAGE}"/usr/$(exhost --target)/include/viennacl/linalg/kernels
+    edo rm -rf "${IMAGE}"/usr/$(exhost --target)/include/viennacl/device_specific/builtin_database/devices/gpu/amd/unknown/
+    edo rm -rf "${IMAGE}"/usr/$(exhost --target)/include/viennacl/device_specific/builtin_database/devices/cpu/amd
+}
+
+
