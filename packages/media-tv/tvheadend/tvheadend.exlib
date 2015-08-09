@@ -1,0 +1,73 @@
+# Copyright 2012 Niels Ole Salscheider <niels_ole@salscheider-online.de>
+# Distributed under the terms of the GNU General Public License v2
+
+require github [ tag="v${PV}" ] systemd-service
+
+SUMMARY="Tvheadend is a combined DVB receiver, Digital Video Recorder and Live TV streaming server"
+HOMEPAGE="https://www.tvheadend.org/"
+LICENCES="GPL-3"
+
+SLOT="0"
+MYOPTIONS="
+    avahi [[ description = [ Enable support for avahi-client that allows auto-discovery of tvheadend, e. g. for the showtime client ] ]]
+    ffmpeg [[ description = [ Enable support for transcoding ] ]]
+    libav [[ requires = ffmpeg ]]
+"
+
+DEPENDENCIES="
+    build:
+        sys-kernel/linux-headers
+        dev-lang/python:*
+    build+run:
+        dev-libs/uriparser[>=0.8.0]
+        net-misc/curl
+        sys-apps/dbus
+        virtual/libssl
+        avahi? ( net-dns/avahi )
+        ffmpeg? (
+            !libav? ( media/ffmpeg )
+            libav? ( media/libav )
+        )
+        user/tvheadend
+    run:
+        media-tv/dtv-scan-tables
+"
+
+DEFAULT_SRC_CONFIGURE_PARAMS=(
+    --mandir=/usr/share/man/man1
+
+    --enable-imagecache
+    --enable-inotify
+    --disable-epoll
+    --enable-curl
+    --enable-uriparser
+    --enable-dbus_1
+
+    --disable-hdhomerun_client
+    --disable-ccache
+    --disable-libdvben50221
+    # needs libdvbcsa
+    --disable-tvhcsa
+    --disable-dvbcsa
+    --disable-bundle
+    # only needed for bundle
+    --disable-zlib
+    # just copies files from dvb-apps, we do not want that
+    --disable-dvbscan
+)
+
+DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
+    avahi
+    'ffmpeg libav'
+)
+
+src_install() {
+    default
+
+    install_systemd_files
+
+    keepdir /etc/tvheadend
+    edo chown tvheadend:video "${IMAGE}"/etc/tvheadend
+    edo chmod 0700 "${IMAGE}"/etc/tvheadend
+}
+
