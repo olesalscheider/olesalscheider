@@ -31,4 +31,7 @@ EQMAKE_PARAMS=(
     QXMPP_PROFILE=0
 )
 
+# The tests access the system bus, test-dbus-daemon does not help
+RESTRICT="test"
+
 
