@@ -8,6 +8,9 @@ LICENCES="LGPL-2.1"
 
 PLATFORMS="~amd64"
 SLOT="0"
+MYOPTIONS="
+    ( providers: libressl openssl ) [[ number-selected = exactly-one ]]
+"
 
 RESTRICT="test" # Sydbox violations
 
@@ -15,7 +18,8 @@ DEPENDENCIES="
     build:
         app-doc/doxygen
     build+run:
-        virtual/libssl
+        providers:libressl? ( dev-libs/libressl:= )
+        providers:openssl? ( dev-libs/openssl )
     test:
         dev-libs/check
 "
