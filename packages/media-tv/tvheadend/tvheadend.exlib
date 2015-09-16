@@ -12,6 +12,7 @@ MYOPTIONS="
     avahi [[ description = [ Enable support for avahi-client that allows auto-discovery of tvheadend, e. g. for the showtime client ] ]]
     ffmpeg [[ description = [ Enable support for transcoding ] ]]
     libav [[ requires = ffmpeg ]]
+    ( providers: libressl openssl ) [[ number-selected = exactly-one ]]
 "
 
 DEPENDENCIES="
@@ -22,12 +23,13 @@ DEPENDENCIES="
         dev-libs/uriparser[>=0.8.0]
         net-misc/curl
         sys-apps/dbus
-        virtual/libssl
         avahi? ( net-dns/avahi )
         ffmpeg? (
             !libav? ( media/ffmpeg )
             libav? ( media/libav )
         )
+        providers:libressl? ( dev-libs/libressl:= )
+        providers:openssl? ( dev-libs/openssl )
         user/tvheadend
     run:
         media-tv/dtv-scan-tables
