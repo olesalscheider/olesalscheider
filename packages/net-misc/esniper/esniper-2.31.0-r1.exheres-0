@@ -9,11 +9,15 @@ SUMMARY="Command-line program for sniping eBay auctions"
 LICENCES="BSD-2"
 SLOT="0"
 PLATFORMS="~amd64 ~x86"
+MYOPTIONS="
+    ( providers: libressl openssl ) [[ number-selected = exactly-one ]]
+"
 
 DEPENDENCIES="
     build+run:
         net-misc/curl[>=7.12]
-        virtual/libssl
+        providers:libressl? ( dev-libs/libressl:= )
+        providers:openssl? ( dev-libs/openssl )
 "
 
 WORK="${WORKBASE}/${MY_PNV}"
