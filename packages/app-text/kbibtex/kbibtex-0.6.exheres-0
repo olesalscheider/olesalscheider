@@ -14,9 +14,10 @@ SLOT="0"
 
 DEPENDENCIES="
     build+run:
-        x11-libs/qt
-        kde/kdelibs
-        dev-libs/libxslt
-        dev-libs/libxml2
+        app-crypt/qca
         app-text/poppler[qt4]
+        dev-libs/libxml2
+        dev-libs/libxslt
+        kde/kdelibs
+        x11-libs/qt
 "
