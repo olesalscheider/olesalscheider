@@ -21,3 +21,7 @@ DEPENDENCIES="
         kde/kdelibs
         x11-libs/qt
 "
+CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DSHARE_INSTALL_PREFIX:PATH="/usr/share"
+)
+
