@@ -1,0 +1,60 @@
+Source: Written by Niels Ole Salscheider
+Upstream: No
+Reason: Needed to fix the install paths
+
+diff -ur a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt	2015-12-18 18:15:25.859004512 +0100
++++ b/CMakeLists.txt	2015-12-18 18:17:41.704764409 +0100
+@@ -70,14 +70,14 @@
+         set(ICONDIR "share/icons")
+         set(LOCALEDIR "share/${PROJECT_NAME}/locale")
+     else()
+-        set(SHAREDIR "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}")
++        set(SHAREDIR "${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}")
+         set(BINDIR "${CMAKE_INSTALL_PREFIX}/bin")
+-        set(DOCDIR "${CMAKE_INSTALL_PREFIX}/share/doc/${PROJECT_NAME}")
+-        set(MANDIR "${CMAKE_INSTALL_PREFIX}/share/man")
++        set(DOCDIR "${CMAKE_INSTALL_DATAROOTDIR}/doc/${PROJECT_NAME}")
++        set(MANDIR "${CMAKE_INSTALL_DATAROOTDIR}/man")
+         set(EXAMPLE_CONF_DIR ${DOCDIR})
+-        set(XDG_APPS_DIR "${CMAKE_INSTALL_PREFIX}/share/applications")
+-        set(ICONDIR "${CMAKE_INSTALL_PREFIX}/share/icons")
+-        set(LOCALEDIR "${CMAKE_INSTALL_PREFIX}/share/${PROJECT_NAME}/locale")
++        set(XDG_APPS_DIR "${CMAKE_INSTALL_DATAROOTDIR}/applications")
++        set(ICONDIR "${CMAKE_INSTALL_DATAROOTDIR}/icons")
++        set(LOCALEDIR "${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT_NAME}/locale")
+     endif()
+ endif()
+ 
+diff -ur a/src/cmake_config.h.in b/src/cmake_config.h.in
+--- a/src/cmake_config.h.in	2015-12-18 18:15:25.854004411 +0100
++++ b/src/cmake_config.h.in	2015-12-18 18:31:48.497384983 +0100
+@@ -5,6 +5,7 @@
+ 
+ #define PROJECT_NAME "@PROJECT_NAME@"
+ #define INSTALL_PREFIX "@CMAKE_INSTALL_PREFIX@"
++#define DATAROOTDIR "@CMAKE_INSTALL_DATAROOTDIR@"
+ #define VERSION_STRING "@VERSION_STRING@"
+ #define USE_AUDIO @USE_AUDIO@
+ #define USE_FREETYPE @USE_FREETYPE@
+@@ -14,7 +15,7 @@
+ #else
+ 	#define BUILD_TYPE "Debug"
+ #endif
+-#define BUILD_INFO "VER="VERSION_STRING" RUN_IN_PLACE=@RUN_IN_PLACE@ USE_GETTEXT=@USE_GETTEXT@ INSTALL_PREFIX=@CMAKE_INSTALL_PREFIX@ BUILD_TYPE="BUILD_TYPE
++#define BUILD_INFO "VER="VERSION_STRING" RUN_IN_PLACE=@RUN_IN_PLACE@ USE_GETTEXT=@USE_GETTEXT@ INSTALL_PREFIX=@CMAKE_INSTALL_PREFIX@ DATAROOTDIR=@CMAKE_INSTALL_DATAROOTDIR@ BUILD_TYPE="BUILD_TYPE
+ 
+ #endif
+ 
+diff -ur a/src/porting.cpp b/src/porting.cpp
+--- a/src/porting.cpp	2015-12-18 18:15:25.849004310 +0100
++++ b/src/porting.cpp	2015-12-18 18:54:22.100836480 +0100
+@@ -323,7 +323,7 @@
+ 	pathRemoveFile(buf, '/');
+ 	pathRemoveFile(buf, '/');
+ 
+-	path_data = std::string(buf) + "/share/" + PROJECT_NAME;
++	path_data = std::string(DATAROOTDIR) + "/" + PROJECT_NAME;
+ 	//path_data = std::string(INSTALL_PREFIX) + "/share/" + PROJECT_NAME;
+ 	if (!fs::PathExists(path_data)) {
+ 		dstream<<"WARNING: data path " << path_data << " not found!";

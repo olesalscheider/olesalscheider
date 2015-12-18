@@ -1,0 +1,42 @@
+# Copyright 2015 Niels Ole Salscheider <niels_ole@salscheider-online.de>
+# Distributed under the terms of the GNU General Public License v2
+
+require cmake [ api=2 ]
+
+SUMMARY="Fun-Focused Free Software Voxel World Game"
+
+HOMEPAGE="http://http://www.voxelands.com"
+DOWNLOADS="http://www.voxelands.com/downloads/${PNV}-src.tar.bz2"
+
+LICENCES="GPL-3"
+MYOPTIONS="
+    ( providers: ijg-jpeg jpeg-turbo ) [[ number-selected = exactly-one ]]
+"
+
+SLOT="0"
+PLATFORMS="~amd64"
+
+# TODO: Unbundle jthread. This needs some adjustments to the build system.
+# dev-libs/jthread
+DEPENDENCIES="
+    build:
+        virtual/pkg-config
+    build+run:
+        app-arch/bzip2
+        dev-db/sqlite:3
+        dev-games/irrlicht
+        media-libs/freetype:=
+        media-libs/libpng:=
+        media-libs/libvorbis
+        media-libs/openal
+        sys-devel/gettext
+        sys-libs/zlib
+        x11-dri/mesa
+        x11-libs/libX11
+        x11-libs/libXxf86vm
+        providers:ijg-jpeg? ( media-libs/jpeg:= )
+        providers:jpeg-turbo? ( media-libs/libjpeg-turbo )
+"
+
+DEFAULT_SRC_PREPARE_PATCHES=( "${FILES}/install-paths.patch" )
+
