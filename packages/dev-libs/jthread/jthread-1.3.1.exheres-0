@@ -1,0 +1,18 @@
+# Copyright 2015 Niels Ole Salscheider <niels_ole@salscheider-online.de>
+# Distributed under the terms of the GNU General Public License v2
+
+require cmake [ api=2 ]
+
+SUMMARY="Collection of classes to make use of threads easy on different platforms"
+HOMEPAGE="http://research.edm.uhasselt.be/~jori/page/index.php?n=CS.Jthread"
+DOWNLOADS="http://research.edm.uhasselt.be/jori/${PN}/${PNV}.tar.bz2"
+
+LICENCES="MIT"
+SLOT="0"
+PLATFORMS="~amd64"
+
+# parallel builds are broken
+DEFAULT_SRC_COMPILE_PARAMS=( -j1 )
+
+CMAKE_SRC_CONFIGURE_PARAMS=( -DLIBRARY_INSTALL_DIR:PATH=/usr/$(exhost --target)/lib/ )
+
