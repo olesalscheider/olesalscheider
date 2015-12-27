@@ -1,6 +1,8 @@
 # Copyright 2015 Niels Ole Salscheider <niels_ole@salscheider-online.de>
 # Distributed under the terms of the GNU General Public License v2
 
+WORK=${WORKBASE}/${PN}
+
 require flag-o-matic cmake [ api=2 ]
 
 SUMMARY="Fun-Focused Free Software Voxel World Game"
