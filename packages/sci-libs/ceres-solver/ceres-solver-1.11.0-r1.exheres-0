@@ -19,6 +19,10 @@ LICENCES="
     !eigen-sparse? ( BSD-3 )
     eigen-sparse? ( LGPL-2.1 )
 "
+DEFAULT_SRC_PREPARE_PATCHES=(
+    "${FILES}"/0001-Allow-to-override-the-share-install-dir.patch
+    "${FILES}"/0002-Install-CMake-files-to-lib-cmake-Ceres-instead-of-sh.patch
+)
 
 DEPENDENCIES="
     build+run:
@@ -35,6 +39,7 @@ CMAKE_SRC_CONFIGURE_OPTIONS=(
 )
 
 CMAKE_SRC_CONFIGURE_PARAMS=(
+    -DSHARE_INSTALL_DIR:PATH=/usr/share
     -DLIB_SUFFIX:STRING=""
     -DMINIGLOG:BOOL=ON
     -DLAPACK:BOOL=ON

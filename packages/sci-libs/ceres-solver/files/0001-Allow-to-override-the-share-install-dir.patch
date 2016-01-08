@@ -1,0 +1,43 @@
+Upstream: See https://ceres-solver-review.googlesource.com/#/c/7280/
+
+From 897939789033e4c1c033d7dd0f18aa37daced78f Mon Sep 17 00:00:00 2001
+From: Niels Ole Salscheider <niels_ole@salscheider-online.de>
+Date: Fri, 8 Jan 2016 14:27:36 +0100
+Subject: [PATCH 1/2] Allow to override the share install dir
+
+This is needed for multiarch layouts where the prefix is /usr/${host} but
+where arch-independet files are installed to /usr/share.
+---
+ CMakeLists.txt             | 2 ++
+ docs/source/CMakeLists.txt | 2 +-
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 9b7e841..51d3990 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -67,6 +67,8 @@ if (CMAKE_SYSTEM_NAME MATCHES "Darwin")
+   endif()
+ endif()
+ 
++set(SHARE_INSTALL_DIR "share" CACHE STRING "The share install dir")
++
+ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+ set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+diff --git a/docs/source/CMakeLists.txt b/docs/source/CMakeLists.txt
+index dd3ddcb..bfd6b23 100644
+--- a/docs/source/CMakeLists.txt
++++ b/docs/source/CMakeLists.txt
+@@ -5,7 +5,7 @@ set(SPHINX_HTML_DIR "${CMAKE_BINARY_DIR}/docs/html")
+ 
+ # Install documentation
+ install(DIRECTORY ${SPHINX_HTML_DIR}
+-        DESTINATION share/doc/ceres
++	DESTINATION "${SHARE_INSTALL_DIR}/doc/ceres"
+         COMPONENT Doc
+         PATTERN "${SPHINX_HTML_DIR}/*")
+ 
+-- 
+2.7.0
+

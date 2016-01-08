@@ -1,0 +1,32 @@
+Upstream: See https://ceres-solver-review.googlesource.com/#/c/7281/
+
+From 0e8c384b879b053fea4e6939058abde5ebbbd031 Mon Sep 17 00:00:00 2001
+From: Niels Ole Salscheider <niels_ole@salscheider-online.de>
+Date: Fri, 8 Jan 2016 14:35:05 +0100
+Subject: [PATCH 2/2] Install CMake files to lib/cmake/Ceres instead of
+ share/Ceres
+
+This is the right thing to do since the CMake files contain target specific
+information. Without this patch, the CMake files will collide on
+distributions that allow to install for multiple targets in parallel (e. g.
+on Exherbo).
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 51d3990..fa696f0 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -759,7 +759,7 @@ configure_file("${CMAKE_SOURCE_DIR}/cmake/CeresConfigVersion.cmake.in"
+ if (WIN32)
+   set(RELATIVE_CMAKECONFIG_INSTALL_DIR CMake)
+ else ()
+-  set(RELATIVE_CMAKECONFIG_INSTALL_DIR share/Ceres)
++  set(RELATIVE_CMAKECONFIG_INSTALL_DIR lib/cmake/Ceres)
+ endif ()
+ 
+ # This "exports" for installation all targets which have been put into the
+-- 
+2.7.0
+
