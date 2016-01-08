@@ -25,6 +25,8 @@ DEFAULT_SRC_PREPARE_PATCHES=(
 )
 
 DEPENDENCIES="
+    build:
+        dev-python/Sphinx
     build+run:
         sci-libs/eigen:3
         sci-libs/SuiteSparse
@@ -40,6 +42,7 @@ CMAKE_SRC_CONFIGURE_OPTIONS=(
 
 CMAKE_SRC_CONFIGURE_PARAMS=(
     -DSHARE_INSTALL_DIR:PATH=/usr/share
+    -DBUILD_DOCUMENTATION:BOOL=ON
     -DLIB_SUFFIX:STRING=""
     -DMINIGLOG:BOOL=ON
     -DLAPACK:BOOL=ON
@@ -48,9 +51,6 @@ CMAKE_SRC_CONFIGURE_PARAMS=(
     -DBUILD_SHARED_LIBS:BOOL=ON
     # SuiteSparse is strongly recommended for bundle adjustment
     -DSUITESPARSE:BOOL=ON
-
-    # fails to build
-    -DBUILD_DOCUMENTATION:BOOL=OFF
 
     # unpackaged dependencies.
     -DBUILD_TESTING:BOOL=OFF
