@@ -3,7 +3,7 @@
 
 require github [ tag="v${PV}" ] systemd-service
 
-export_exlib_phases src_install pkg_postinst
+export_exlib_phases src_prepare src_install pkg_postinst
 
 SUMMARY="Tvheadend is a combined DVB receiver, Digital Video Recorder and Live TV streaming server"
 HOMEPAGE="https://www.tvheadend.org/"
@@ -64,6 +64,14 @@ DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     avahi
     'ffmpeg libav'
 )
+
+tvheadend_src_prepare() {
+    default
+
+    # Adjust path for scanfiles
+    edo sed -e "s:/usr/share/dvb:/usr/share/dvbv5:" \
+            -i src/input/mpegts/scanfile.c
+}
 
 tvheadend_src_install() {
     default
