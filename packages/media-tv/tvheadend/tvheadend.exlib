@@ -70,9 +70,9 @@ tvheadend_src_install() {
 
     install_systemd_files
 
-    keepdir /etc/tvheadend
-    edo chown tvheadend:video "${IMAGE}"/etc/tvheadend
-    edo chmod 0700 "${IMAGE}"/etc/tvheadend
+    dodir /var/lib/tvheadend
+    keepdir /var/lib/tvheadend
+    edo chown tvheadend:video "${IMAGE}"/var/lib/tvheadend
 }
 
 tvheadend_pkg_postinst() {
