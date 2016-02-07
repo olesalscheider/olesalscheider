@@ -1,0 +1,14 @@
+Title: repository/olesalscheider moved to git.exherbo.org
+Author: Niels Ole Salscheider <niels_ole@salscheider-online.de>
+Content-Type: text/plain
+Posted: 2016-02-07
+Revision: 1
+News-Item-Format: 1.0
+
+The repository "olesalscheider" has been moved from GitHub to git.exherbo.org.
+The old repository at GitHub will not be updated anymore and I will delete it
+in a few weeks.
+
+Please adjust the URL in /etc/paludis/repositories/olesalscheider.conf to:
+    sync = git://git.exherbo.org/dev/olesalscheider.git
+
