@@ -60,6 +60,18 @@ DEFAULT_SRC_CONFIGURE_PARAMS=(
     --disable-dvbscan
 )
 
+if ever is_scm ; then
+    DEFAULT_SRC_CONFIGURE_PARAMS+=(
+        # disable pre-comiled static libs that are
+        # downloaded during src_compile
+        --disable-hdhomerun_static
+        --disable-libffmpeg_static
+        --disable-libx264_static
+        --disable-libx265_static
+        --disable-libmfx_static
+    )
+fi
+
 DEFAULT_SRC_CONFIGURE_OPTION_ENABLES=(
     avahi
     'ffmpeg libav'
